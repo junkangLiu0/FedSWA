@@ -1,7 +1,4 @@
-# FedSWA
-Here’s a draft **README.md** for your paper and codebase. It integrates details from your paper *“Improving Generalization in Federated Learning with Highly Heterogeneous Data via Momentum-Based Stochastic Controlled Weight Averaging”* and your `main.py` script.
 
----
 
 # README
 
@@ -124,4 +121,5 @@ If you use this code, please cite the paper:
 ```
 
 ---
+
 
