@@ -20,7 +20,7 @@ Both algorithms extend upon **SCAFFOLD** and **SAM-type methods**, aiming to fin
 * numpy
 * matplotlib
 * tensorboardX
-* ray
+* ray=1.0.0
 * filelock
 
 You can install the dependencies with:
@@ -121,5 +121,6 @@ If you use this code, please cite the paper:
 ```
 
 ---
+
 
 
