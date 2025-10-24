@@ -15,12 +15,13 @@ Both algorithms extend upon **SCAFFOLD** and **SAM-type methods**, aiming to fin
 ## Requirements
 
 * Python 3.8+
-* PyTorch
+* PyTorch 2.0+
 * torchvision
 * numpy
 * matplotlib
 * tensorboardX
 * ray=1.0.0
+* protobuf==3.20.3
 * filelock
 
 You can install the dependencies with:
@@ -121,6 +122,7 @@ If you use this code, please cite the paper:
 ```
 
 ---
+
 
 
 
