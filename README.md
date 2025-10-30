@@ -8,7 +8,9 @@ This repository contains the implementation of **FedSWA** and **FedMoSWA**, fede
 
 > *Improving Generalization in Federated Learning with Highly Heterogeneous Data via Momentum-Based Stochastic Controlled Weight Averaging (FedSWA & FedMoSWA)*.
 
-Both algorithms extend upon **SCAFFOLD** and **SAM-type methods**, aiming to find **global flat minima** that lead to better test performance compared to FedAvg, FedSAM, and related approaches.
++vx 15653218567 帮你解决代码部署问题！
+
+
 
 ---
 
@@ -122,6 +124,7 @@ If you use this code, please cite the paper:
 ```
 
 ---
+
 
 
 
