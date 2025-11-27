@@ -12,16 +12,18 @@ Both algorithms extend upon **SCAFFOLD** and **SAM-type methods**, aiming to fin
 
 ---
 
-## Requirements
 
+## 🛠 Environment Setup
+
+### Requirements
 * Python 3.8
-* PyTorch
-* torchvision
-* numpy
-* matplotlib
-* tensorboardX
-* ray==1.0.0
-* filelock
+torch==2.4.1\
+torchvision==0.19.1\
+numpy\
+ray==1.0.0\
+tensorboardX==2.6.2.2\
+peft==0.13.2\
+transformers==4.46.3
 
 You can install the dependencies with:
 
@@ -105,5 +107,6 @@ If you use this code, please cite the paper:
 ```
 
 ---
+
 
 
