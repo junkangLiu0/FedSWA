@@ -53,8 +53,8 @@ class Nesterov(torch.optim.Optimizer):
                     g_update[key] = g_update[key].to('cuda')
                     #e_w = g_update[key] * scale.to(p)
                     key = keys_list[idx]
-                    #e_w = g_update[key]*self.gamma-g_update[key] * scale.to(p)
-                    e_w = g_update[key] * self.gamma
+                    e_w = g_update[key]*self.gamma-g_update[key] * scale.to(p)
+                    #e_w = g_update[key] * self.gamma
                 p.add_(e_w )
                 self.state[p]["e_w"] = e_w
 

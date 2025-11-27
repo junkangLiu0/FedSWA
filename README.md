@@ -1,131 +1,151 @@
+# FedMuon
 
+# FedMuon: Accelerating Federated Learning with Matrix Orthogonalization
 
-# README
-
-## Improving Generalization in Federated Learning with Highly Heterogeneous Data
-
-This repository contains the implementation of **FedSWA** and **FedMoSWA**, federated learning algorithms designed to improve generalization in the presence of highly heterogeneous client data. The work is based on the paper:
-
-> *Improving Generalization in Federated Learning with Highly Heterogeneous Data via Momentum-Based Stochastic Controlled Weight Averaging (FedSWA & FedMoSWA)*.
-
-+vx 15653218567 帮你解决代码部署问题！
-
-
+This repository provides the official implementation of the paper
+**“FedMuon: Accelerating Federated Learning with Matrix Orthogonalization”**,
+which introduces a communication-efficient and fast-converging federated learning framework that incorporates **orthogonalized updates** for local models and **matrix-based momentum aggregation** on the server.
 
 ---
 
-## Requirements
+## 🌟 Key Features
 
-* Python 3.8+
-* PyTorch 2.0+
+* **Matrix Orthogonalization**: Prevents gradient interference between clients by orthogonalizing parameter updates.
+* **Accelerated Convergence**: Combines momentum aggregation with block-wise orthogonal projections to stabilize updates.
+* **Communication-Efficient**: Reduces redundant information transmission in cross-device federated settings.
+* **Flexible Framework**: Built on **Ray (v1.0.0)** for scalable client–server simulations.
+* **Extensible Design**: Supports multiple optimization methods including `FedMuon`, `FedAvg`, `FedAdam`, and `FedMomentum`.
+
+---
+
+## 🛠 Environment Setup
+
+### Requirements
+
+* Python ≥ 3.8
+* [Ray 1.0.0](https://docs.ray.io/en/releases-1.0.0/)
+* PyTorch ≥ 1.10
 * torchvision
 * numpy
 * matplotlib
 * tensorboardX
-* ray=1.0.0
-* protobuf==3.20.3
-* filelock
 
-You can install the dependencies with:
+Install dependencies:
 
 ```bash
-pip install -r requirements.txt
+pip install torch torchvision ray==1.0.0 numpy matplotlib tensorboardX
 ```
 
 ---
 
-## Dataset
+## 📂 Dataset Preparation
 
-The code supports multiple datasets:
+The code automatically downloads the dataset if it’s not found locally.
+Supported datasets:
 
-* **CIFAR-10 / CIFAR-100**
-* **Tiny-ImageNet**
-* **EMNIST**
 * **MNIST**
+* **EMNIST**
+* **CIFAR-10**
+* **CIFAR-100**
 
-Data will be automatically downloaded to the `./data` directory unless specified via `--datapath`.
+You can also manually place datasets in the `./data/` directory.
 
 ---
 
-## Usage
+## 🚀 Quick Start
 
-To run the training with **SCAFFOLD+** on **CIFAR100** using a **ResNet-18** backbone and Group Normalization:
+### Run FedMuon on CIFAR-100
 
 ```bash
-python main.py \
-  --alg SCAFFOLD+ \
-  --lr 0.1 \
-  --data_name CIFAR100 \
-  --alpha_value 0.6 \
-  --alpha 0.1 \
-  --epoch 1001 \
-  --extname CIFAR100 \
-  --lr_decay 0.998 \
-  --gamma 0.2 \
-  --CNN resnet18 \
-  --E 5 \
-  --batch_size 50 \
-  --gpu 0 \
-  --p 1 \
-  --num_gpus_per 0.1 \
-  --normalization GN \
-  --selection 0.1 \
-  --print 0
-```
-
----
-
-## Key Arguments
-
-* `--alg` : Algorithm to use (e.g., `FedAvg`, `FedSWA`, `FedMoSWA`, `SCAFFOLD+`).
-* `--lr` : Initial learning rate.
-* `--lr_decay` : Decay rate for learning rate scheduling.
-* `--epoch` : Total number of training epochs.
-* `--E` : Local epochs per communication round.
-* `--batch_size` : Training batch size.
-* `--alpha_value` : Dirichlet distribution parameter (controls data heterogeneity).
-* `--alpha` : Momentum/variance reduction hyperparameter.
-* `--gamma` : Server momentum coefficient.
-* `--selection` : Fraction of clients selected each round.
-* `--CNN` : Model architecture (`resnet18`, `vgg11`, `lenet5`, etc.).
-* `--normalization` : Normalization layer (`BN` for BatchNorm, `GN` for GroupNorm).
-* `--gpu` : GPU index(es) to use.
-* `--num_gpus_per` : Fraction of GPU resources allocated per client.
-
----
-
-## Algorithm Overview
-
-* **FedSWA**: Incorporates **stochastic weight averaging** and cyclical learning rate schedules to find flatter global minima, outperforming FedAvg and FedSAM on heterogeneous data.
-* **FedMoSWA**: Builds on FedSWA with **momentum-based variance reduction**, aligning local and global updates more effectively than SCAFFOLD.
-
----
-
-## Results
-
-Experiments on **CIFAR-10/100** and **Tiny-ImageNet** show that:
-
-* **FedSWA** achieves better generalization than FedAvg and FedSAM.
-* **FedMoSWA** further reduces client drift and improves optimization stability, especially under high heterogeneity.
-
----
-
-## Citation
-
-If you use this code, please cite the paper:
+python  main_FedMuon.py --alg FedMuon --lr 3e-4 --data_name CIFAR100 --alpha_value 0.1 --alpha  10  --epoch 301  --extname FedMuon --lr_decay 2 --gamma 0.5  --CNN   deit_tiny --E 5 --batch_size 50   --gpu 0 --p 1 --num_gpus_per 0.1 --normalization BN --selection 0.1 --print 0 --pre 1 --num_workers 100 --preprint 10 --beta1 0.9 --beta2 0.999 --rho 0.01 --pix 32 --lora 0 --K 50
+python  main_FedMuon.py --alg Local_Muon --lr 3e-4 --data_name CIFAR100 --alpha_value 0.1 --alpha  10  --epoch 301  --extname FedMuon --lr_decay 2 --gamma 0.5  --CNN   deit_tiny --E 5 --batch_size 50   --gpu 0 --p 1 --num_gpus_per 0.1 --normalization BN --selection 0.1 --print 0 --pre 1 --num_workers 100 --preprint 10 --beta1 0.9 --beta2 0.999 --rho 0.01 --pix 32 --lora 0 --K 50
+python  main_FedMuon.py --alg FedAvg --lr 1e-1 --data_name CIFAR100 --alpha_value 0.1 --alpha  10  --epoch 301  --extname FedMuon --lr_decay 2 --gamma 0.5  --CNN   deit_tiny --E 5 --batch_size 50   --gpu 0 --p 1 --num_gpus_per 0.1 --normalization BN --selection 0.1 --print 0 --pre 1 --num_workers 100 --preprint 10 --beta1 0.9 --beta2 0.999 --rho 0.01 --pix 32 --lora 0 --K 50
+python  main_FedMuon.py --alg FedAvg_adamw --lr 3e-4 --data_name CIFAR100 --alpha_value 0.1 --alpha  10  --epoch 301  --extname FedMuon --lr_decay 2 --gamma 0.5  --CNN   deit_tiny --E 5 --batch_size 50   --gpu 0 --p 1 --num_gpus_per 0.1 --normalization BN --selection 0.1 --print 0 --pre 1 --num_workers 100 --preprint 10 --beta1 0.9 --beta2 0.999 --rho 0.01 --pix 32 --lora 0 --K 50
 
 ```
-@inproceedings{liu2025fedswa,
-  title={Improving Generalization in Federated Learning with Highly Heterogeneous Data via Momentum-Based Stochastic Controlled Weight Averaging},
-  author={Liu, Junkang and Liu, Yuanyuan and Shang, Fanhua and Liu, Hongying and Liu, Jin and Feng, Wei},
-  booktitle={Proceedings of the 42nd International Conference on Machine Learning},
+
+### Run FedAvg for Comparison
+
+
+
+---
+
+## ⚙️ Argument Overview
+
+| Argument         | Description                                                | Default     |
+| ---------------- | ---------------------------------------------------------- | ----------- |
+| `--alg`          | Federated algorithm (`FedMuon`, `FedAvg`, `FedAdam`, etc.) | `FedAvg`    |
+| `--data_name`    | Dataset name (`MNIST`, `EMNIST`, `CIFAR10`, `CIFAR100`)    | `MNIST`     |
+| `--model`        | Model architecture (`lenet5`, `resnet10`, `resnet18`)      | `lenet5`    |
+| `--num_workers`  | Number of simulated clients                                | `100`       |
+| `--selection`    | Fraction of clients selected per round                     | `0.1`       |
+| `--E`            | Local epochs per client                                    | `1`         |
+| `--batch_size`   | Local batch size                                           | `50`        |
+| `--lr`           | Learning rate                                              | `0.1`       |
+| `--lr_decay`     | Learning rate decay factor                                 | `1.0`       |
+| `--alpha_value`  | Dirichlet parameter controlling non-IID degree             | `0.6`       |
+| `--gpu`          | GPU index(es)                                              | `'0'`       |
+| `--extname`      | Extra name tag for output                                  | `'default'` |
+| `--check`        | Resume training from checkpoint                            | `0`         |
+| `--num_gpus_per` | GPU fraction allocated to each Ray worker                  | `1.0`       |
+
+---
+
+## 🧠 Algorithm Highlights
+
+### 1. **Matrix Orthogonalization Layer**
+
+Local client updates are decomposed and orthogonalized using matrix operations, ensuring that aggregated updates capture **independent learning directions** across clients.
+
+### 2. **Server Momentum Aggregation**
+
+The central server maintains a **momentum term** over aggregated gradients, smoothing oscillations and promoting faster convergence.
+
+### 3. **Ray-Based Simulation**
+
+Clients (`DataWorker`) and the server (`ParameterServer`) are implemented as **Ray remote actors**, allowing parallel training and realistic communication simulation even on a single machine.
+
+---
+
+## 📊 Logging and Checkpoints
+
+* Logs are automatically written to the `./log/` directory.
+* Checkpoints are saved to:
+
+  ```
+  ./checkpoint/ckpt-{alg}-{lr}-{dataset}-{alpha_value}.pt
+  ```
+* Training curves (accuracy, loss) are stored in `.npy` format in the `./plot/` directory.
+* TensorBoard logs can be visualized with:
+
+  ```bash
+  tensorboard --logdir runs
+  ```
+
+---
+
+## 🔬 Reproducibility Tips
+
+1. The script automatically sets fixed random seeds for Python, NumPy, and PyTorch (`seed=42`).
+2. Keep `alpha_value` and `selection` consistent for fair comparisons.
+3. Repeat experiments 3–5 times and report average ± std accuracy.
+4. Use consistent hardware (single GPU or same Ray configuration).
+
+---
+
+## 📘 Citation
+
+If you find this code useful for your research, please cite:
+
+```bibtex
+@inproceedings{fedmuon2025,
+  title={FedMuon: Accelerating Federated Learning with Matrix Orthogonalization},
+  author={Your Name and Coauthors},
+  booktitle={Proceedings of ...},
   year={2025}
 }
 ```
 
 ---
 
-
-
-
-
+Would you like me to generate and attach this as a downloadable `README.md` file (UTF-8 encoded) with formatting preserved and example commands aligned?

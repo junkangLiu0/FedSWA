@@ -282,12 +282,16 @@ class Adam_mini(torch.optim.Optimizer):
                         continue
                     # neuron_numel = group["neuron_numel"] # assume grad is a matrix by default, so do not need this
                     if len(state) == 0:
+                        m = torch.zeros_like(p.grad)
                         state["m"] = torch.zeros_like(p.grad,
                                                       memory_format=torch.preserve_format)  # assume grad is a matrix by default, no need to view
                         # state["m"] = torch.zeros_like(p, memory_format=torch.preserve_format).view(-1, neuron_numel)
                         state["step"] = 0
                         state["neuron_per_gpu"] = state["m"].size(0)  # this is neuron per gpu
-
+                        if m.ndim == 1:
+                            state["vmean"] = torch.zeros_like(m).unsqueeze(-1)
+                        else:
+                            state["vmean"] = torch.zeros_like(m[:, 0:1])
                         # NOTE: We must use `new_zeros` for vmean to be a
                         # DTensor (not `torch.Tensor`) for DTensor parameters.
                         # for standard tensor: state["vmean"] = torch.zeros(1, device=p.device)

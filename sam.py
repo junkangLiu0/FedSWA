@@ -33,6 +33,8 @@ class SAM(torch.optim.Optimizer):
                 if p.grad is None: continue
                 p.data = self.state[p]["old_p"]  # get back to "w" from "w + e(w)"
 
+                #p.add_(e_w)  # climb to the local maximum "w + e(w)"
+
         self.base_optimizer.step()  # do the actual "sharpness-aware" update
 
         if zero_grad: self.zero_grad()
