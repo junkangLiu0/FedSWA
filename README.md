@@ -11,7 +11,7 @@ This repository contains the implementation of **FedSWA** and **FedMoSWA**, fede
 Both algorithms extend upon **SCAFFOLD** and **SAM-type methods**, aiming to find **global flat minima** that lead to better test performance compared to FedAvg, FedSAM, and related approaches.
 
 ---
-
+一张4090或者一张2080ti即可训练！！
 
 ## 🛠 Environment Setup
 创建环境，要python=3.8
@@ -49,6 +49,7 @@ EOF
 ---
 
 下载模型权重网址：
+
 vit-base：
 https://huggingface.co/Junkang2/vit/tree/main
 
@@ -56,6 +57,11 @@ swin_transformer
 https://huggingface.co/Junkang2/swin_transformer/tree/main
 
 ## Dataset
+
+数据集下载网址
+
+Tiny-ImageNet：
+https://huggingface.co/datasets/Junkang2/Tiny-ImageNet/upload/main
 
 The code supports multiple datasets:
 
@@ -73,11 +79,15 @@ Data will be automatically downloaded to the `./data` directory unless specified
 To run the training with **SCAFFOLD+** on **CIFAR100** using a **ResNet-18** backbone and Group Normalization:
 
 ```bash
-python  main_FedSWA.py --alg FedSWA --lr 1e-1 --data_name CIFAR100 --alpha_value 0.1 --alpha  10  --epoch 301  --extname FedMuon --lr_decay 2 --gamma 0.85  --CNN   resnet18 --E 5 --batch_size 50   --gpu 2 --p 1 --num_gpus_per 0.1 --normalization BN --selection 0.1 --print 0 --pre 1 --num_workers 100 --preprint 10  --rho 0.01 --pix 32 --lora 0 --K 50
-python  main_FedSWA.py --alg MoFedSWA --lr 1e-1 --data_name CIFAR100 --alpha_value 0.6 --alpha  10  --epoch 301  --extname FedMuon --lr_decay 2 --gamma 0.5  --CNN   resnet18 --E 5 --batch_size 50   --gpu 2 --p 1 --num_gpus_per 0.1 --normalization BN --selection 0.1 --print 0 --pre 1 --num_workers 100 --preprint 10  --rho 0.01 --pix 32 --lora 0 --K 50
+python  main_FedSWA.py --alg FedSWA --lr 1e-1 --data_name CIFAR100 --alpha_value 0.1 --alpha  10  --epoch 301  --extname FedMuon --lr_decay 2 --gamma 0.85  --CNN   resnet18 --E 5 --batch_size 50   --gpu 0 --p 1 --num_gpus_per 0.1 --normalization BN --selection 0.1 --print 0 --pre 1 --num_workers 100 --preprint 10  --rho 0.01 --pix 32 --lora 0 --K 50
+
+python  main_FedSWA.py --alg MoFedSWA --lr 1e-1 --data_name CIFAR100 --alpha_value 0.1 --alpha  10  --epoch 301  --extname FedMuon --lr_decay 2 --gamma 0.5  --CNN   resnet18 --E 5 --batch_size 50   --gpu 0 --p 1 --num_gpus_per 0.1 --normalization BN --selection 0.1 --print 0 --pre 1 --num_workers 100 --preprint 10  --rho 0.01 --pix 32 --lora 0 --K 50
+
+python  main_FedSWA.py --alg FedAvg --lr 1e-1 --data_name CIFAR100 --alpha_value 0.1 --alpha  10  --epoch 301  --extname FedMuon --lr_decay 2 --gamma 0.5  --CNN   resnet18 --E 5 --batch_size 50   --gpu 0 --p 1 --num_gpus_per 0.1 --normalization BN --selection 0.1 --print 0 --pre 1 --num_workers 100 --preprint 10  --rho 0.01 --pix 32 --lora 0 --K 50
+
 
 ```
-
+另外注意！！FedSWA的学习率一般是FedAvg的两倍！lr=0.1*2
 ---
 
 ## Key Arguments
@@ -129,6 +139,7 @@ If you use this code, please cite the paper:
 ```
 
 ---
+
 
 
 
