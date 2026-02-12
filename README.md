@@ -48,6 +48,13 @@ EOF
 ```
 ---
 
+下载模型权重网址：
+vit-base：
+https://huggingface.co/Junkang2/vit/tree/main
+
+swin_transformer 
+https://huggingface.co/Junkang2/swin_transformer/tree/main
+
 ## Dataset
 
 The code supports multiple datasets:
@@ -122,6 +129,7 @@ If you use this code, please cite the paper:
 ```
 
 ---
+
 
 
 
