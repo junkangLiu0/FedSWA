@@ -14,6 +14,11 @@ Both algorithms extend upon **SCAFFOLD** and **SAM-type methods**, aiming to fin
 
 
 ## 🛠 Environment Setup
+创建环境，要python=3.8
+```
+conda create -n fedswa python=3.8 -y
+conda activate fedswa
+```
 
 ### Requirements
 * Python 3.8
@@ -31,6 +36,16 @@ You can install the dependencies with:
 pip install -r requirements.txt
 ```
 
+
+下载速度慢改一下镜像源
+```
+mkdir -p ~/.config/pip
+cat > ~/.config/pip/pip.conf <<'EOF'
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+timeout = 120
+EOF
+```
 ---
 
 ## Dataset
@@ -107,6 +122,7 @@ If you use this code, please cite the paper:
 ```
 
 ---
+
 
 
 
