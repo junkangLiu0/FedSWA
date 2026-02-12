@@ -837,7 +837,7 @@ class DataWorker(object):
     def update_FedSWA(self, weights, E, index,lr):
         self.model.load_state_dict(weights)
         self.data_id_loader(index)
-        self.optimizer = torch.optim.SGD(self.model.parameters(), lr=lr, weight_decay=1e-3 )
+        self.optimizer = torch.optim.SGD(self.model.parameters(), lr=lr*2, weight_decay=1e-3 )
         lr1=lr
         rho=0
         lr2=rho*lr
