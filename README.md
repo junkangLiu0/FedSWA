@@ -3,6 +3,8 @@
 # README
 
 ## Improving Generalization in Federated Learning with Highly Heterogeneous Data
+##一张4090或者两张2080ti即可训练！！发顶会！！代码问题或者讨论+vx 15653218567
+
 
 This repository contains the implementation of **FedSWA** and **FedMoSWA**, federated learning algorithms designed to improve generalization in the presence of highly heterogeneous client data. The work is based on the paper:
 
@@ -139,6 +141,7 @@ If you use this code, please cite the paper:
 ```
 
 ---
+
 
 
 
