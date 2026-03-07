@@ -11,7 +11,7 @@ This repository contains the implementation of **FedSWA** and **FedMoSWA**, fede
 Both algorithms extend upon **SCAFFOLD** and **SAM-type methods**, aiming to find **global flat minima** that lead to better test performance compared to FedAvg, FedSAM, and related approaches.
 
 ---
-一张4090或者一张2080ti即可训练！！
+一张4090或者两张2080ti即可训练！！
 
 ## 🛠 Environment Setup
 创建环境，要python=3.8
@@ -139,6 +139,7 @@ If you use this code, please cite the paper:
 ```
 
 ---
+
 
 
 
