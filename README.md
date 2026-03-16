@@ -2,7 +2,7 @@
 
 # README
 
-## Improving Generalization in Federated Learning with Highly Heterogeneous Data
+## Improving generalization in federated learning with highly heterogeneous data via momentum-based stochastic controlled weight averaging 被ICML 2025录用！！
 
 * 一张4090或者两张2080ti即可训练！！发顶会！！代码问题或者讨论+vx 15653218567
 
